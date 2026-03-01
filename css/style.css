@@ -1,4 +1,4 @@
-.bg-head {
+        .bg-head {
             background-color: var(--color--utama);
             
         }
@@ -16,26 +16,20 @@
         }
 
         .btn-pil {
-            background-color: #EDF1FC;
             width: 100%;
             text-align: center;
             font-size: 12px;
-            color: var(--color--utama);
-            font-weight: 600;
-            padding: 7px 15px;
-            border-radius: 20px;
-            border: 1.5px solid var(--color--utama);
-            cursor: pointer;
+            font-weight: 500;
         }
 
         .pil-active {
-            font-weight: 600;
-            background-color: var(--color--utama);
+            background-color: #42a5f5;
             color: #fff;
-            padding: 7px 15px;
-            border-radius: 20px;
+            padding: 0px;
+            border-radius: 15px;
             -webkit-animation: fadeEffect 1s;
             animation: fadeEffect 1s;
+            pointer-events: none;
         }
 
         .d-grid-1 {
@@ -53,13 +47,33 @@
         .bg-produk {
             background-color: #fff;
             padding: 12px;
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
-            border-radius: 5px;
+            border-radius: 10px;
+            position: relative;
+            transition: all 0.2s ease;
         }
 
         .bg-produk.border-active {
             border: 1.6px solid var(--color--utama) !important;
             transform: translateY(-2px);
+        }
+        
+        .bg-produk.stok-habis {
+            background-color: #f5f5f5;
+            opacity: 0.8;
+            pointer-events: none;
+            filter: grayscale(0.5);
+        }
+        
+        .bg-produk.stok-habis::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.05);
+            border-radius: 10px;
+            pointer-events: none;
         }
         
         .box-list {
@@ -100,22 +114,99 @@
         .accordion {
             --bs-accordion-bg: transparent;
         }
-        .harga-Asli {
-          position: absolute;
-          bottom: 0px;
-          right: 0px;
-          font-size: 10px !important;
-          border-radius: 10px 0px 5px 0px;
-          color: white !important;
-          font-size: 11px !important;
-          font-weight: bold;
-          text-decoration: line-through;
-          background: red;
-          padding-left: 10px;
-          padding-right: 10px;
-          padding-top: 3px;
-          padding-bottom: 3px;
+        
+        /* CSS TAMBAHAN UNTUK LABEL DISKON DAN GANGGUAN (SEPERTI ML.HTML) */
+        .discount-label {
+            font-size: 10px;
+            font-weight: bold;
+            color: #fff;
+            --r: .4em;
+            --c: #ff0000;
+            position: absolute;
+            top: 10px;
+            right: calc(-1*var(--r));
+            line-height: 1.8; 
+            padding: 0 .8em calc(2*var(--r));
+            border-radius: 0 var(--r) var(--r) 0;
+            background: 
+                radial-gradient(100% 50% at right,var(--c) 98%,#0000 101%) 0 0/.5lh calc(100% - 2*var(--r)),
+                radial-gradient(100% 50% at left,#0005 98%,#0000 101%) 100% 100%/var(--r) calc(2*var(--r)),
+                conic-gradient(from 180deg at calc(100% - var(--r)) calc(100% - 2*var(--r)),#0000 25%,var(--c) 0) 100% 0/calc(101% - .5lh) 100%;
+            background-repeat: no-repeat;   
+            z-index: 10;
         }
+
+        .discount-label::before {
+            content: "";
+            margin-right: 5px;
+        }
+
+        .gangguan-label {
+            display: inline-block;
+            background-color: red;
+            color: #fff;
+            font-weight: bold;
+            padding: 2px 8px;
+            font-size: 8px;
+            border-radius: 10px;
+            position: absolute;
+            top: 40px;
+            right: 5px;
+            z-index: 10;
+        }
+
+        .gangguan-label::before {
+            content: "❕";
+            margin-right: 5px;
+        }
+        
+        /* Style untuk harga asli (coret) */
+        .harga-asli {
+            font-size: 11px;
+            color: #999;
+            text-decoration: line-through;
+            margin-right: 5px;
+        }
+        
+        .harga-diskon {
+            color: var(--color--utama);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .harga-normal {
+            color: var(--color--utama);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .info-stok-habis {
+            font-size: 10px;
+            color: #ff4444;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+        
+        .info-stok-habis i {
+            margin-right: 3px;
+        }
+        
+        /* Badge diskon di detail */
+        .detail-diskon-badge {
+            background-color: #ff4444;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .detail-diskon-badge i {
+            margin-right: 5px;
+            color: #ffd700;
+        }
+        
         hr {
           border: none;
           height: 1px;
@@ -187,7 +278,7 @@
              display: flex;
              align-items: center;
              background: #ffffff;
-             border: 1.5px solid #ECECEC;
+             border: 1.5px solid transparent;
              border-radius: 10px;
              overflow: hidden;
              flex: 1;
@@ -246,97 +337,24 @@
          .view-btn:hover {
              opacity: 0.9;
          }
-         /* CONTAINER KATEGORI HORIZONTAL */
-.categories-container {
-    display: flex;
-    flex-wrap: nowrap; /* PENTING: tidak wrap ke bawah */
-    overflow-x: auto; /* Scroll horizontal jika perlu */
-    overflow-y: hidden;
-    gap: 0.5rem;
-    padding: 8px 0;
-    width: 100%;
-    
-    /* Smooth scrolling */
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    
-    /* Hilangkan scrollbar default */
-    scrollbar-width: thin;
-    scrollbar-color: var(--color--utama) transparent;
-}
 
-/* Scrollbar untuk webkit browsers */
-.categories-container::-webkit-scrollbar {
-    height: 4px;
-}
+        /* Style untuk icon */
+        .icon-pil {
+            transition: all 0.25s ease-in-out;
+            background: white;
+            padding: 7px ;
+            border: 1.5px solid transparent;
+            cursor: pointer;
+        }
 
-.categories-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
+        .icon-pil:hover {
+            border-color: var(--color--utama) !important;
+            transform: scale(1.05);
+        }
 
-.categories-container::-webkit-scrollbar-thumb {
-    background: var(--color--utama);
-    border-radius: 10px;
-}
-
-/* TOMBOL KATEGORI */
-.categories-container .btn-pil {
-    border: 1.3px solid var(--color--utama);
-    font-size: 12px;
-    font-weight: 500;
-    padding: 8px 11px;  
-    border-radius: 20px;
-    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);      
-    
-    /* PENTING: Mencegah wrap dan memastikan ukuran tetap */
-    white-space: nowrap;
-    flex-shrink: 0; /* Tidak menyusut */
-    min-width: fit-content; /* Ukuran minimum sesuai konten */
-    
-    color: var(--color--utama);
-    background-color: #EDF1FC;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-/* Hover effect */
-.categories-container .btn-pil:hover {
-    background-color: #e0e7ff;
-    transform: translateY(-1px);
-}
-
-/* Active state */
-.categories-container .btn-pil.pil-active {
-    background-color: var(--color--utama);
-    color: #fff;
-    padding: 8px 11px;
-    border-radius: 20px;
-    animation: fadeEffect 1s;
-    pointer-events: none;
-    opacity: 1;
-}
-
-/* Responsive untuk mobile */
-@media (max-width: 768px) {
-    .categories-container {
-        gap: 0.3rem;
-        padding-bottom: 8px;
-    }
-    
-    .categories-container .btn-pil {
-        font-size: 11px;
-        padding: 6px 10px;
-    }
-}
-
-/* Untuk desktop - tombol lebih besar */
-@media (min-width: 769px) {
-    .categories-container .btn-pil {
-        font-size: 12px;
-        padding: 10px 16px;
-    }
-}
+        .icon-pil:active {
+            transform: scale(0.95);
+        }
          
         /* ===== FAVORITE POPUP FULL SCREEN STYLES ===== */
     .popup-full {
@@ -760,4 +778,45 @@
       .save-favorite-btn {
         width: 100%;
       }
-    }
+/* Untuk container kategori */
+.categories-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 11px 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    transition: all 0.3s ease;
+}
+
+/* Khusus untuk kondisi 2 kategori (center) */
+.categories-container.center-mode {
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    overflow-x: visible !important;
+}
+
+.categories-container.center-mode .btn-pil {
+    flex: 0 0 auto;
+    margin: 0 0px;
+}
+
+/* Style untuk button kategori */
+.categories-container .btn-pil {
+    flex: 0 0 auto;
+    padding: 8px 10px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color--utama);
+    background: #EDF1FC;
+    color: var(--color--utama);
+    font-size: 12px;
+    white-space: nowrap;
+    width: auto;
+    transition: all 0.2s ease;
+}
+
+.categories-container .btn-pil.pil-active {
+    background: var(--color--utama);
+    color: white;
+}
