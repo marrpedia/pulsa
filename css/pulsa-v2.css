@@ -1,4 +1,4 @@
-        .bg-head {
+       .bg-head {
             background-color: var(--color--utama);
             
         }
@@ -993,7 +993,7 @@
     overflow-x: auto; /* Scroll horizontal jika perlu */
     overflow-y: hidden;
     gap: 0.5rem;
-    padding: 8px 0;
+    padding: 8px 11px;
     width: 100%;
     
     /* Smooth scrolling */
