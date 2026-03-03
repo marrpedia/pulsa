@@ -993,7 +993,7 @@
     overflow-x: auto; /* Scroll horizontal jika perlu */
     overflow-y: hidden;
     gap: 0.5rem;
-    padding: 8px 11px;
+    padding: 8px 0;
     width: 100%;
     
     /* Smooth scrolling */
@@ -1061,7 +1061,7 @@
 @media (max-width: 768px) {
     .categories-container {
         gap: 0.3rem;
-        padding-bottom: 8px;
+        
     }
     
     .categories-container .btn-pil {
@@ -1074,7 +1074,7 @@
 @media (min-width: 769px) {
     .categories-container .btn-pil {
         font-size: 12px;
-        padding: 10px 16px;
+        padding: 8px 11px;
     }
 }
          
